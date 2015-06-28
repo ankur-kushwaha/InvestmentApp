@@ -32,3 +32,7 @@
 .form-horizontal .slider-horizontal{
     width:100%;
 }
+
+.price-slider .slider{
+    margin: 40px 0;
+}
