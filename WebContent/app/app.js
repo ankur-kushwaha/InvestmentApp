@@ -5,7 +5,9 @@ angular.module('investmentApp', [
     'ngRoute',
     'investmentApp.view1',
     'investmentApp.view2',
-    'investmentApp.common'
+    'investmentApp.common',
+    'rzModule',
+    'ngRadialGauge'
 ]).
 
 config(['$routeProvider', function($routeProvider) {

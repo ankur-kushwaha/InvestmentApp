@@ -1,6 +1,15 @@
 <div class="price-slider">
-<div>test {{test}}</div> 
-   
-    <input my-slider ng-model="test" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" class="form-control" />
+    <div class="row">
+        <div class="col-xs-2">
+            <img class="slider-image" ng-src={{imgsrc}} alt="">
+        </div>
+        <div class="col-xs-10">
+            <rzslider rz-slider-model="slider.value"
+                rz-slider-floor='slider.floor'
+                rz-slider-ceil="slider.ceil"
+                rz-slider-always-show-bar="true"
+                rz-slider-translate="translate"
+                rz-slider-tpl-url="rzSliderTpl.html"></rzslider>
+        </div>
+    </div>
 </div>
- 
