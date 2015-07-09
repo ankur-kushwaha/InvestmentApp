@@ -1,15 +1,12 @@
 <div class="price-slider">
     <div class="row">
+            <div>{{imgsrc()}}</div>
         <div class="col-xs-2">
+            
             <img class="slider-image" ng-src={{imgsrc}} alt="">
         </div>
         <div class="col-xs-10">
-            <rzslider rz-slider-model="slider.value"
-                rz-slider-floor='slider.floor'
-                rz-slider-ceil="slider.ceil"
-                rz-slider-always-show-bar="true"
-                rz-slider-translate="translate"
-                rz-slider-tpl-url="rzSliderTpl.html"></rzslider>
+            <rzslider rz-slider-model="slider.value" rz-slider-floor='slider.floor' rz-slider-ceil="slider.ceil" rz-slider-always-show-bar="true" rz-slider-step="50" rz-slider-translate="translate" rz-slider-tpl-url="rzSliderTpl.html"></rzslider>
         </div>
     </div>
 </div>
