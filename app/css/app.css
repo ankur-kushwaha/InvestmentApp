@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(238, 237, 253);
+    background-color: rgb(238, 237, 253) !important;
 }
 .navbar{
     border-radius: 0px !important;
@@ -28,11 +28,12 @@ body{
     border-radius: 10px;
     border:1px solid gray;
 }
-.slider-wrapper{
-      padding-bottom: 100px;
+
+#result{
+    margin-top:100px;
 }
 #result .bordered{
-    min-height: 200px;
+    min-height: 100px;
 }
 .journey-item{
     margin:10px;
