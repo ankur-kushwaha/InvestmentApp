@@ -13,49 +13,54 @@ angular.module('investmentApp.view1', ['ngRoute'])
 
     $scope.demo = "sdf";
 
+    $scope.setSelected=function(journey){
+        for(var i in $scope.journeys){
+            $scope.journeys[i].selected=false;    
+        }
+        $scope.journeys[this.$index].selected=true;
+    }
 
-
-    $scope.journeys = [1, 1, 1, 1];
+    $scope.journeys = [{},{},{},{}];
 
     var data = [{
         floor: 50,
-        ceil: 5000,
-        value: 100,
+        ceil: 500,
+        value: 250,
         img: {
-            0: 'test0',
-            100: 'test1',
-            200: 'test2',
-            500: 'test3'
+            0: 'image1.jpg',
+            100: 'image2.jpg',
+            200: 'image3.jpg',
+            500: 'image4.jpg'
         }
     }, {
         floor: 50,
         ceil: 1000,
         value: 100,
         img: {
-            0: 'test0',
-            50: 'test1',
-            100: 'test2',
-            200: 'test3'
+             0: 'image1.jpg',
+            100: 'image2.jpg',
+            200: 'image3.jpg',
+            500: 'image4.jpg'
         }
     }, {
         floor: 50,
         ceil: 500,
         value: 100,
         img: {
-            0: 'test0',
-            50: 'test1',
-            100: 'test2',
-            200: 'test3'
+             0: 'image1.jpg',
+            100: 'image2.jpg',
+            200: 'image3.jpg',
+            500: 'image4.jpg'
         }
     }, {
         floor: 50,
         ceil: 600,
         value: 100,
         img: {
-            0: 'test0',
-            50: 'test1',
-            100: 'test2',
-            200: 'test3'
+            0: 'image1.jpg',
+            100: 'image2.jpg',
+            200: 'image3.jpg',
+            500: 'image4.jpg'
         }
     }]
 

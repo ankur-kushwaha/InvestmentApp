@@ -5,7 +5,9 @@ body{
     border-radius: 0px !important;
 }
 .slider-image{
-    width:70%;
+   width: 80px;
+height: 80px;
+padding: 10px;
 }
 .green {
   background-color: green;
@@ -41,6 +43,13 @@ body{
 .journey-item img{
     width: 100%;
 }
+
+.journey-item.hover, .selected{
+    border: 1px solid green;
+border-radius: 10px;
+background-color: rgb(34,34,34);
+}
+
 
 .bordered{
     border: 1px solid black;

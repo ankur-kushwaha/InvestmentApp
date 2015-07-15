@@ -17,7 +17,7 @@ angular.module('investmentApp.common.directive', [])
                     if(slider.value>i)
                         imgsrc=slider.img[i];
                 }
-                return imgsrc+".png";
+                return "images/shoes/girls/"+imgsrc;
             }
             scope.translate = function(value) {
                 return '$' + value;
