@@ -10,7 +10,7 @@ angular.module('investmentApp.common.directive', ['ui.bootstrap-slider'])
             onStopSlide:"&",
             onSlide:"&",
             onStartSlide:"&",
-            change:'&'
+            onChange:'&'
         },
         link: function(scope, ele, attrs) {
             scope.initialValue = 6;
