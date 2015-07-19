@@ -17,7 +17,8 @@ angular.module('ui.bootstrap-slider', [])
                 formatter: '&',
                 onStartSlide: '&',
                 onStopSlide: '&',
-                onSlide: '&'
+                onSlide: '&',
+                change:'&'
             },
             link: function ($scope, element, attrs, ngModelCtrl, $compile) {
                 var ngModelDeregisterFn, ngDisabledDeregisterFn;
@@ -162,6 +163,7 @@ angular.module('ui.bootstrap-slider', [])
                         slider.on('slideStop',$scope.onStopSlide);
                         slider.on('slideStart',$scope.onstartslide);
                         slider.on('slide',$scope.onSlide);
+                        slider.on('change',$scope.change);
 
                         // deregister ngDisabled watcher to prevent memory leaks
                         if (angular.isFunction(ngDisabledDeregisterFn)) {

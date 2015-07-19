@@ -11,6 +11,7 @@
             <slider ng-model="slider.value" min="slider.floor"
             on-slide="onSlide()"
             slider-tooltip="always"
+            change="change()"
             on-start-slide="onStartSlide()"
             on-stop-slide="onStopSlide()"
             step="1" max="slider.ceil" value="slider.value"></slider>
