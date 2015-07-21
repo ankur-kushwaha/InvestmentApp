@@ -6,9 +6,8 @@ angular.module('investmentApp', [
     'investmentApp.view1',
     'investmentApp.view2',
     'investmentApp.common',
-    'rzModule',
     'ngRadialGauge',
-    'ui.bootstrap'
+    'ui.bootstrap','ngFx', 'ngAnimate'
 ]).
 
 config(['$routeProvider', function($routeProvider) {

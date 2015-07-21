@@ -1,4 +1,3 @@
-
 'use strict';
 
 angular.module('investmentApp.view1', ['ngRoute'])
@@ -10,68 +9,49 @@ angular.module('investmentApp.view1', ['ngRoute'])
     });
 }])
 
-.controller('View1Ctrl', function($scope, $log, $timeout) {
+.controller('View1Ctrl', function($scope, $log, $location) {
 
 
-    var markedJourneys=[0];
+    var markedJourneys = [0];
 
     $scope.setSelected = function(journey) {
         for (var i in $scope.journeys) {
             $scope.journeys[i].selected = false;
         }
-            if(markedJourneys.indexOf(this.$index)==-1){
-               markedJourneys.push(this.$index);
-            }
+        if (markedJourneys.indexOf(this.$index) == -1) {
+            markedJourneys.push(this.$index);
+        }
         $scope.journeys[this.$index].selected = true;
     }
-
-
-
 
     var data1 = [{
         //dress data
         floor: 10,
         ceil: 300,
         value: 30,
-        img: {
-            0: 'images/shoes/girls/image1.jpg',
-            50: 'images/shoes/girls/image2.jpg',
-            100: 'images/shoes/girls/image3.jpg',
-            200: 'images/shoes/girls/image4.jpg'
-        }
+        image: 'images/girls/iconDefaultDress.png',
+        modifiedImage: 'images/girls/iconDress.png'
     }, {
         //shoes data
         floor: 15,
         ceil: 300,
         value: 50,
-        img: {
-            0: 'images/shoes/girls/image1.jpg',
-            50: 'images/shoes/girls/image2.jpg',
-            100: 'images/shoes/girls/image3.jpg',
-            200: 'images/shoes/girls/image4.jpg'
-        }
+        image: 'images/girls/iconDefaultShoe.png',
+        modifiedImage: 'images/girls/iconShoes.png'
     }, {
         //bags data
         floor: 15,
         ceil: 1000,
         value: 70,
-        img: {
-            0: 'images/shoes/girls/image1.jpg',
-            100: 'images/shoes/girls/image2.jpg',
-            200: 'images/shoes/girls/image3.jpg',
-            500: 'images/shoes/girls/image4.jpg'
-        }
+        image: 'images/girls/iconDefaultBag.png',
+        modifiedImage: 'images/girls/iconbag.png'
     }, {
         //Cosmetics
         floor: 1,
         ceil: 35,
         value: 8,
-        img: {
-            0: 'images/shoes/girls/image1.jpg',
-            10: 'images/shoes/girls/image2.jpg',
-            20: 'images/shoes/girls/image3.jpg',
-            30: 'images/shoes/girls/image4.jpg'
-        }
+        image: 'images/girls/iconDefaultCosmetics.png',
+        modifiedImage: 'images/girls/iconCosmetics.png'
     }];
 
     var data2 = [{
@@ -212,25 +192,33 @@ angular.module('investmentApp.view1', ['ngRoute'])
         }
     }]
 
-    var slidersData=[data1,data2,data3,data4];
-
-    $scope.sliders1 = data1;
-    $scope.sliders2 = data2;
-    $scope.sliders3 = data3;
-    $scope.sliders4 = data4;
-
-
-
     $scope.journeys = [{
         selected: true,
-        imgsrc: "images/test.png"
+        img: "images/journey/3_style_selected.png",
+        imgSelected: "images/journey/3_style_selected.png",
+        sliders: data1
     }, {
-        imgsrc: "images/test.png"
+        img: "images/journey/1_houseNenvironment.png",
+        imgSelected: "images/journey/1_houseNenvironment_selected.png",
+        sliders: data2
     }, {
-        imgsrc: "images/test.png"
+        img: "images/journey/2_vehicle.png",
+        imgSelected: "images/journey/2_vehicle_selected.png",
+        sliders: data3
     }, {
-        imgsrc: "images/test.png"
+        img: "images/journey/4_Vacations.png",
+        imgSelected: "images/journey/4_Vacations_selected.png",
+        sliders: data4
     }];
+
+    $scope.imgsrc = function($index) {
+        if ($scope.journeys[$index].hover || $scope.journeys[$index].selected) {
+            return $scope.journeys[$index].imgSelected;
+        }
+        else {
+            return $scope.journeys[$index].img;
+        }
+    }
 
     var configDatas = {
         cat1: {
@@ -301,11 +289,11 @@ angular.module('investmentApp.view1', ['ngRoute'])
 
     var averageMonthlyExpense = 2000;
     var defAverageMonthlyExpense = 2000;
-   /* $scope.$on("slideEnded", function() {
-        $scope.monthlySpend();
-    });*/
+    /* $scope.$on("slideEnded", function() {
+         $scope.monthlySpend();
+     });*/
 
-    $scope.averageMonthlyExpense=averageMonthlyExpense;
+    $scope.averageMonthlyExpense = averageMonthlyExpense;
 
     $scope.monthlySpend = function() {
         // averageMonthlyExpense = 2000;
@@ -318,10 +306,10 @@ angular.module('investmentApp.view1', ['ngRoute'])
                 break;
             }
         }
-        if (selectedCat==null) return;
-        selectedCat++;
+        if (selectedCat == null) return;
 
-        var configData = configDatas['cat' + selectedCat];
+        //selectedCat = i;
+        var configData = configDatas['cat' + (Number(selectedCat) + 1)];
         var configDataWeight = configData.weightage;
 
 
@@ -331,26 +319,28 @@ angular.module('investmentApp.view1', ['ngRoute'])
         for (var i in configData.items) {
             var defaultValue = configData.items[i].defaultValue;
             var weight = configData.items[i].weightage;
-            var currentValue = $scope['sliders' + selectedCat][i].value;
+            var currentValue = $scope.journeys[selectedCat].sliders[i].value;
 
             var diff = ((currentValue - defaultValue) / defaultValue) * 100;
 
             var itemContribution = weight * configDataValue / 100; //250
 
             itemChange += diff * itemContribution / 100; //30
-            //configData.items[i].defaultValue = currentValue;
-
-            //var out=(diff*configDataWeight/100)*weight/100;
-
-
         }
 
-        console.log(Math.floor(itemChange));
+        //console.log(Math.floor(itemChange));
         averageMonthlyExpense = defAverageMonthlyExpense + itemChange;
         //$timeout(function(){
 
+        var careerLeft = 60 - Number($location.search().age);
+        var inflationRate = 10;
+
+        var goal = averageMonthlyExpense * 12 * Math.pow(1.1, careerLeft);
+
         $scope.$apply(function() {
             $scope.averageMonthlyExpense = Math.floor(averageMonthlyExpense);
+            $scope.goal = goal;
+            $scope.targetInvestment = goal / careerLeft / 12;
         })
 
         //})

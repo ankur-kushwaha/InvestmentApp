@@ -1,36 +1,49 @@
+<!--<div cover-flow=""></div>-->
 <div class="wrapper">
+    <div class="center">
+        <p class="lead">Tell us about your current lifestyle</p>
+        <hr>
+        <small>Drag the sliders for each category to tell us about your spends</small>
+    </div>
+
+    <p></p>
+
     <div class="row relative-position slider-wrapper">
 
-        <div class="col-sm-2">
-            <div class="journey-item" ng-repeat="journey in journeys track by $index"  ng-class="{hover: hover,selected : journey.selected}"
-                ng-mouseenter="hover = true"
-                ng-mouseleave="hover = false"
+        <div class="col-sm-2 journey">
+
+            <div class="journey-item" ng-repeat="journey in ::journeys track by $index" ng-class="{selected : journey.selected}"
+                ng-mouseenter="journey.hover = true"
+                ng-mouseleave="journey.hover = false"
                 ng-click='setSelected(journey)'>
-                <img ng-src="{{journey.imgsrc}}"  />
+
+                <img ng-src="{{imgsrc($index)}}" />
+
             </div>
         </div>
         <div class="col-sm-10">
-
-            <div ng-show="journeys[0].selected" slider-with-image="slider" on-slide="monthlySpend()" ng-repeat="slider in sliders1 track by $index"></div>
-            <div ng-show="journeys[1].selected" slider-with-image="slider" on-slide="monthlySpend()" ng-repeat="slider in sliders2 track by $index"></div>
-            <div ng-show="journeys[2].selected" slider-with-image="slider" ng-repeat="slider in sliders3 track by $index"></div>
-            <div ng-show="journeys[3].selected" slider-with-image="slider" ng-repeat="slider in sliders4 track by $index"></div>
+            <div ng-repeat='journey in journeys'>
+                <div ng-show="journeys[$parent.$index].selected" slider-with-image="slider"
+                on-change="monthlySpend()" ng-repeat="slider in journey.sliders track by $index"></div>
+            </div>
 
             <div class="row" id="result">
                 <div class="col-sm-3">
                     <div class="bordered center">
                         <h1>${{averageMonthlyExpense}}</h1>
-                    <h5>Monthly Spend</h5>
+                        <h5>Monthly Spend</h5>
                     </div>
                 </div>
                 <div class=" col-sm-3 ">
-                    <div class="bordered center"><h1>${{total()/24 | number : 0}}</h1>
-                    <h5>Target Investment</h5>
+                    <div class="bordered center">
+                        <h1>${{targetInvestment | number : 0}}</h1>
+                        <h5>Target Investment</h5>
                     </div>
                 </div>
                 <div class=" col-sm-3">
-                    <div class="bordered center"><h1>${{total()*2}}</h1>
-                    <h5>Retirement Goal</h5>
+                    <div class="bordered center">
+                        <h1>${{goal| number:0}}</h1>
+                        <h5>Retirement Goal</h5>
                     </div>
                 </div>
                 <div class=" col-sm-3">

@@ -9,19 +9,29 @@ angular.module('investmentApp.common.directive', ['ui.bootstrap-slider'])
             slider: "=sliderWithImage",
             onStopSlide:"&",
             onSlide:"&",
-            onStartSlide:"&"
+            onStartSlide:"&",
+            onChange:'&'
         },
         link: function(scope, ele, attrs) {
             scope.initialValue = 6;
             var slider=scope.slider;
-            scope.imgsrc = function(){
+           /* scope.imgsrc = function(){
                 var imgsrc=slider.img[0];
                 for(var i in slider.img){
                     if(slider.value>i)
                         imgsrc=slider.img[i];
                 }
                 return imgsrc;
+            }*/
+
+            scope.imgsrc=function(){
+                if(scope.slider.changed){
+                    return scope.slider.modifiedImage;
+                }else{
+                    return scope.slider.image;
+                }
             }
+
             scope.translate = function(value) {
                 return value;
             };
@@ -36,12 +46,11 @@ angular.module('investmentApp.common.directive', ['ui.bootstrap-slider'])
     }
 }])
 
-.directive('mySlider',function(){
+.directive('coverFlow',function(){
     return {
+        templateUrl: 'partials/cover-flow.html',
         compile:function(elem,attrs){
-            var mySlider = new Slider($(elem), {
-            // initial options object
-            });
+             $(elem).coverflow();
         }
     }
 })

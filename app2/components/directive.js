@@ -37,12 +37,11 @@ angular.module('investmentApp.common.directive', ['ui.bootstrap-slider'])
     }
 }])
 
-.directive('mySlider',function(){
+.directive('coverFlow',function(){
     return {
+        templateUrl: 'partials/cover-flow.html',
         compile:function(elem,attrs){
-            var mySlider = new Slider($(elem), {
-            // initial options object
-            });
+             $(elem).coverflow();
         }
     }
 })

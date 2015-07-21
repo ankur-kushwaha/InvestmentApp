@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <div class="row relative-position slider-wrapper">
+
+        <div class="col-sm-2">
+            <div class="journey-item" ng-repeat="journey in journeys track by $index"  ng-class="{hover: hover,selected : journey.selected}"
+                ng-mouseenter="hover = true"
+                ng-mouseleave="hover = false"
+                ng-click='setSelected(journey)'>
+                <img ng-src="{{journey.imgsrc}}"  />
+            </div>
+        </div>
+        <div class="col-sm-10">
+
+            <div ng-show="journeys[0].selected" slider-with-image="slider" on-slide="monthlySpend()" ng-repeat="slider in sliders1 track by $index"></div>
+            <div ng-show="journeys[1].selected" slider-with-image="slider" on-slide="monthlySpend()" ng-repeat="slider in sliders2 track by $index"></div>
+            <div ng-show="journeys[2].selected" slider-with-image="slider" ng-repeat="slider in sliders3 track by $index"></div>
+            <div ng-show="journeys[3].selected" slider-with-image="slider" ng-repeat="slider in sliders4 track by $index"></div>
+
+            <div class="row" id="result">
+                <div class="col-sm-3">
+                    <div class="bordered center">
+                        <h1>${{averageMonthlyExpense}}</h1>
+                    <h5>Monthly Spend</h5>
+                    </div>
+                </div>
+                <div class=" col-sm-3 ">
+                    <div class="bordered center"><h1>${{total()/24 | number : 0}}</h1>
+                    <h5>Target Investment</h5>
+                    </div>
+                </div>
+                <div class=" col-sm-3">
+                    <div class="bordered center"><h1>${{total()*2}}</h1>
+                    <h5>Retirement Goal</h5>
+                    </div>
+                </div>
+                <div class=" col-sm-3">
+                    <div class="bordered">
+                        <div width="200" ng-radial-gauge ranges="ranges" value="gauzeTotal()" value-unit="unit" precision="precision" lower-limit="0" upper-limit="100"></div>
+                    </div>
+                </div>
+                <!--<a class="btn btn-default" ng-click="monthlySpend()" href=""> ClickME</a>-->
+            </div>
+        </div>
+    </div>
+</div>
