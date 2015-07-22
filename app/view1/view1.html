@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-10">
             <div ng-repeat='journey in journeys'>
-                <div ng-show="journeys[$parent.$index].selected" slider-with-image="slider"
+                <div ng-show="journeys[$parent.$index].selected"  slider-with-image="slider"
                 on-change="monthlySpend()" ng-repeat="slider in journey.sliders track by $index"></div>
             </div>
 

@@ -194,7 +194,7 @@ angular.module('investmentApp.view1', ['ngRoute'])
 
     $scope.journeys = [{
         selected: true,
-        img: "images/journey/3_style_selected.png",
+        img: "images/journey/3_style.png",
         imgSelected: "images/journey/3_style_selected.png",
         sliders: data1
     }, {
@@ -333,14 +333,29 @@ angular.module('investmentApp.view1', ['ngRoute'])
         //$timeout(function(){
 
         var careerLeft = 60 - Number($location.search().age);
+        var age=Number($location.search().age);
         var inflationRate = 10;
 
-        var goal = averageMonthlyExpense * 12 * Math.pow(1.1, careerLeft);
+        //var goal = averageMonthlyExpense * 12 * careerLeft;
+
+        var r=0.05;
+        var g=0.08;
+        var c1=r-g;
+        var c2=Math.pow((1+g)/(1+r),careerLeft);
+        var c3=1-c2;
+        var c4=(goal*c1)/c3;
+        console.log(c4);
+        var l=20 //life expectency after retirement
+        var goal=averageMonthlyExpense*Math.pow((1+r),careerLeft)*((1-Math.pow(1+r),l)/r);
+        var r=0.1; //rate of interest
+        var targetInvestment=(goal*r)/(Math.pow(1+r,careerLeft)-1);
+
+
 
         $scope.$apply(function() {
             $scope.averageMonthlyExpense = Math.floor(averageMonthlyExpense);
             $scope.goal = goal;
-            $scope.targetInvestment = goal / careerLeft / 12;
+            $scope.targetInvestment = targetInvestment/12;
         })
 
         //})
