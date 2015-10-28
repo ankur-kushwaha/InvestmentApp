@@ -27,36 +27,36 @@ angular.module('investmentApp.view1', ['ngRoute'])
     var data1 = [{
         //dress data
         floor: 10,
-        ceil: 100,
-        value: 46,
+        ceil: 300,
+        value: 30,
         image: 'images/girls/iconDefaultDress.png',
         modifiedImage: 'images/girls/iconDress.png'
     }, {
         //shoes data
-        floor: 10,
-        ceil: 100,
-        value: 36,
+        floor: 15,
+        ceil: 300,
+        value: 50,
         image: 'images/girls/iconDefaultShoe.png',
         modifiedImage: 'images/girls/iconShoes.png'
     }, {
         //bags data
-        floor: 20,
-        ceil: 200,
-        value: 40,
+        floor: 15,
+        ceil: 1000,
+        value: 70,
         image: 'images/girls/iconDefaultBag.png',
         modifiedImage: 'images/girls/iconbag.png'
     }, {
         //Cosmetics
-        floor: 5,
-        ceil: 100,
-        value: 18,
+        floor: 1,
+        ceil: 35,
+        value: 8,
         image: 'images/girls/iconDefaultCosmetics.png',
         modifiedImage: 'images/girls/iconCosmetics.png'
     },{
         //hats
-        floor: 5,
-        ceil: 100,
-        value: 22,
+        floor: 1,
+        ceil: 35,
+        value: 8,
         image: 'images/girls/iconDefaulthat.png',
         modifiedImage: 'images/girls/iconHat.png'
     }];
@@ -232,29 +232,23 @@ angular.module('investmentApp.view1', ['ngRoute'])
     }
 
     var configDatas = {
-        //style
         cat1: {
-            weightage: 5,
+            weightage: 25,
             items: [{
-                //clothes
-                defaultValue: 46,
-                weightage: 28
+                defaultValue: 30,
+                weightage: 20
             }, {
-                //shoes
-                defaultValue: 36,
-                weightage: 22
+                defaultValue: 50,
+                weightage: 20
             }, {
-                //bag
-                defaultValue: 40,
-                weightage: 25
+                defaultValue: 70,
+                weightage: 20
             }, {
-                //makeup
-                defaultValue: 18,
-                weightage: 11
+                defaultValue: 8,
+                weightage: 20
             },{
-                //hat
-                defaultValue: 22,
-                weightage: 14
+                defaultValue: 8,
+                weightage: 20
             }]
         },
         cat2: {
@@ -368,53 +362,36 @@ angular.module('investmentApp.view1', ['ngRoute'])
         averageMonthlyExpense = defAverageMonthlyExpense + itemChange;
         //$timeout(function(){
 
-        calculateOthers(averageMonthlyExpense);
-
-        $scope.$apply();
-    }
-
-    function calculateOthers(averageMonthlyExpense){
         var careerLeft = 60 - Number($location.search().age);
         var age=Number($location.search().age);
-
-        var inflationRate = 0.02;
+        var inflationRate = 10;
 
         //var goal = averageMonthlyExpense * 12 * careerLeft;
 
-
+        var r=0.025;
         var g=0.08;
+        var c1=r-g;
+        var c2=Math.pow((1+g)/(1+r),careerLeft);
+        var c3=1-c2;
+        var c4=(goal*c1)/c3;
+        console.log(c4);
+        var l=20 //life expectency after retirement
+        var goal=averageMonthlyExpense*Math.pow((1+r),careerLeft)*((1-Math.pow(1+r),l)/r);
         var r=0.1; //rate of interest
         var n=12;
-        var l=20 //life expectency after retirement
-
-        var retirementAge=60;
-        var pot=0;
-        var potArr=[];
-        var costArr=[];
-        var interestArr=[];
-        while(l>0){
-            var cost=averageMonthlyExpense*12*Math.pow((1+inflationRate),retirementAge+l);
-            var interest=pot*r;
-            pot=pot-interest+cost;
-           /* potArr[retirementAge+l]=pot;
-            costArr[retirementAge+l]=cost;
-            interestArr[retirementAge+l]=interest;*/
-            l--;
-        }
-      /*  console.log(potArr);
-        console.log(interestArr);
-        console.log(costArr);*/
-        var goal=pot;
+        var targetInvestment=(goal*r/n)/(Math.pow(1+(r/n),careerLeft*n)-1);
 
 
-       // var goal=averageMonthlyExpense*Math.pow((1+r),careerLeft)*((1-Math.pow(1+r),l)/r);
-        var targetInvestment=(goal*r)/(Math.pow(1+(r),careerLeft)-1);
-        $scope.averageMonthlyExpense = Math.floor(averageMonthlyExpense);
-        $scope.goal = goal;
-        $scope.targetInvestment = targetInvestment/12;
+
+        $scope.$apply(function() {
+            $scope.averageMonthlyExpense = Math.floor(averageMonthlyExpense);
+            $scope.goal = goal;
+            $scope.targetInvestment = targetInvestment/12;
+        })
+
+        //})
+
     }
-
-    calculateOthers(averageMonthlyExpense);
 
     $scope.total = function() {
         var total = 0;

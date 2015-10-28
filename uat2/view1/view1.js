@@ -396,9 +396,9 @@ angular.module('investmentApp.view1', ['ngRoute'])
             var cost=averageMonthlyExpense*12*Math.pow((1+inflationRate),retirementAge+l);
             var interest=pot*r;
             pot=pot-interest+cost;
-           /* potArr[retirementAge+l]=pot;
+            potArr[retirementAge+l]=pot;
             costArr[retirementAge+l]=cost;
-            interestArr[retirementAge+l]=interest;*/
+            interestArr[retirementAge+l]=interest;
             l--;
         }
       /*  console.log(potArr);
